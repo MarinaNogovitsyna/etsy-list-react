@@ -1,4 +1,4 @@
-export type Item = {
+export interface Item {
     listing_id: number,
     url?: string,
     image?: string,

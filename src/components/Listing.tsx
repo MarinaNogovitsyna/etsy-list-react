@@ -1,11 +1,14 @@
 import React, { FC } from 'react'
-import { Item } from '../ts/types'
+import { Item } from '../ts/types';
 
-type ListingProps = {
+interface ListingProps  {
     item: Item[]
 }
 
 export const Listing:FC<ListingProps> = ({ item = []}) => {
+    console.log(item);
+    
+    
     const getTitle = (title: string) => {
         if(title.length > 50){
             return `${title.slice(0, 50)}...`

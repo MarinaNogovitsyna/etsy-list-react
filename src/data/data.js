@@ -2225,9 +2225,12 @@ const dataJson = [
   },
 ];
 
-const data = dataJson.map((item) => {
-  const { listing_id, url, title, currency_code, price, quantity, MainImage } = item;
-  const image = MainImage?.url_570xN; 
+const activeItems = dataJson.filter((el) => el.state !== "removed");
+
+const data = activeItems.map((item) => {
+  const { listing_id, url, title, currency_code, price, quantity, MainImage } =
+    item;
+  const image = MainImage.url_570xN;
   return { listing_id, url, image, title, currency_code, price, quantity };
 });
 
