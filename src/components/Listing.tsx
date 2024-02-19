@@ -15,6 +15,15 @@ export const Listing:FC<ListingProps> = ({ item = []}) => {
         }
         return title
     }
+
+    const getLevel = (level: number) => {
+        if (level < 10) {
+            return 'level-low'
+        } else if (level < 20){
+            return 'level-medium'
+        } return 'level-high'
+    }
+
   return (
     <div className="item-list">
         {item.map(el => (
@@ -25,19 +34,19 @@ export const Listing:FC<ListingProps> = ({ item = []}) => {
                 </a>
                 </div>
                 <div className="item-details">
-                    {/* <p className="item-title">{getTitle(el.title)}</p> */}
-                    <p className="item-title">{el.title}</p>
-                    <p className="item-price">{
-                        el.currency_code === 'USD' 
-                        ? `$${el.price}`
-                        : el.currency_code === 'EUR'
-                        ? `€${el.price}`
-                        : `${el.price} ${el.currency_code}`
-                    }</p>
-                    {/* <p className={`item-quantity ${el.quantity < 10 ? 'level-low' : el.quantity < 20 ? 'level-medium' : 'level-high'}`}>
-                        {el.quantity}
-                    </p> */}
-                    <p className="item-quantity level-medium">{el.quantity}</p>
+                    { el.title ? <p className="item-title">{getTitle(el.title)}</p> : null}
+                    {el.price && el.currency_code
+                        ? <p className="item-price">{
+                            el.currency_code === 'USD' 
+                            ? `$${el.price}`
+                            : el.currency_code === 'EUR'
+                            ? `€${el.price}`
+                            : `${el.price} ${el.currency_code}`
+                            }</p>
+                        : null}
+                    {el.quantity 
+                    ? <p className={`item-quantity ${getLevel(el.quantity)}`}>{el.quantity}</p>
+                    : null}
                 </div>
             </div>
         ))}
